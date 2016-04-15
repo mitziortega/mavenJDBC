@@ -5,6 +5,7 @@
  */
 package org.unitec;
 
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,7 +101,16 @@ public class VentanaFacil extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            ModeloConexion.conectarse("root", "");
+            
+        //haremos una incercion con JSBS a la tabla facil
+            //paso 1: crear un objeto de tipo conexion
+            Connection con= ModeloConexion.conectarse("root", "");//localhost:3306/mysql?zeroDateTimeBehavior=convertToNull
+        // paso 2 con esa conexion crear un preypent stayment preparado
+         PreparedStatement st=con.prepareStatement("insert into facil (nombre, edad) values (?,?)");
+           st.setString(1, textoNombre.getText());
+           st.setInt(2, Integer.parseInt(textoEdad.getText()));
+           st.execute();
+           etiquetaInformacion.setText("Registro insertado");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             

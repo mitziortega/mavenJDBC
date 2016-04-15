@@ -4,3 +4,4 @@ create table facil(id_facil integer primary key auto_increment,
 
 select * from facil;
 
+delete * from facil;
